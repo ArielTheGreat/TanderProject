@@ -1,0 +1,36 @@
+body{
+	background-image: url("../images/background.jpeg");
+	background-size: cover;
+	color:#FFECEE;
+}
+h1{
+	display: inline;
+	font-size: 3em;
+}
+input{
+	margin: 0.9em 0px;
+	border-radius: 10px;
+	height: 3em;
+	width: 25em;
+}
+input[type="submit"]
+{
+	cursor: pointer;
+}
+form{
+	
+	background-color: pink;
+	display: inline-block;
+	text-align: center;
+}
+#content{
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	height: 80%;
+	width: 30%;
+	position: relative;
+	left: 35%;
+	background-color: pink;
+}
+

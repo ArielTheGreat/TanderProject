@@ -1,0 +1,31 @@
+body{
+	background-image: url("../images/background.jpeg");
+	background-size: cover;
+	color:pink;
+}
+h1{
+	display: inline;
+	font-size: 3em;
+}
+input{
+	margin: 0.9em 0px;
+	border-radius: 10px;
+	height: 3em;
+	width: 25em;
+}
+input[type="submit"]
+{
+	width:10em;
+	height: 3em;
+	font-size: 2em;
+	cursor: pointer;
+}
+form{
+	padding: 7px 65px;
+	background-color: pink;
+	display: inline-block;
+	text-align: center;
+}
+#content{
+	text-align: center;
+}

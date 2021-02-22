@@ -1,3 +1,42 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+inicio:
+  path: /
+  controller: App\Controller\inicio::index
+
+login:
+  path: /login
+  controller: App\Controller\login::login
+
+createAccount:
+  path: /createAccount
+  controller: App\Controller\createAccount::create
+
+loginAccount:
+  path: /loginIntoAccount
+  controller: App\Controller\loginAccount::login
+
+restablishPassword:
+  path: /restablishPassword
+  controller: App\Controller\restablishPassword::load
+
+confirmation:
+  path: /confirmation
+  controller: App\Controller\confirmation::sendPetition
+  
+emailRestablish:
+  path: /emailRestablish
+  controller: App\Controller\emailRestablish::sendEmailRestablish
+    
+resetCode:
+  path: /resetCode
+  controller: App\Controller\resetCode::reset
+
+AdminZone:
+  path: /AdminZone
+  controller: App\Controller\AdminZone::load
+
+lockVault:
+  path: /lockVault
+  controller: App\Controller\lockVault::proceed

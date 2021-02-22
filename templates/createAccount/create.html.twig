@@ -1,0 +1,24 @@
+<!Doctype html>
+<html>
+	<head>
+		<title>Create Account in Tander</title>
+		<meta charset="urf-8">
+		<link rel="icon" type="image/png" href="../images/icon.png">
+		<link rel="stylesheet" type="text/css" href="../styles/createAccount.css">
+	</head>
+	<body>
+		<div id="tab">
+			<img id="iconBar" src="../images/bigIcon.png"><h1>Tander</h1>
+		</div>
+		<a href="{{path('inicio')}}"><button>Home</button></a>
+		<div id="content">
+		<form method="post" action="{{path('confirmation')}}">
+			<img src="../images/heart.png"><br>
+			<input type="text" name="username" placeholder="Username">
+			<br><input type="password" name="password" placeholder="Password"><br>
+			<input type="text" name="email" placeholder="Email"><br>
+			<input type="submit" value="Create Account">
+		</form>
+	</div>
+	</body>
+</html>

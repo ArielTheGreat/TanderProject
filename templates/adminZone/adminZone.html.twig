@@ -1,0 +1,18 @@
+<html>
+<head>
+    <link rel="stylesheet" href="../styles/adminzone.css">
+</head>
+<body>
+<div class="Menu">
+<?php
+echo "<form action='welcome.php'>";
+echo "<input type='submit' value='Go Back'>";
+echo "</form>"    
+?>
+</div>
+ {% for user in users %}
+     <form method='POST' action='{{path("lockVault")}}'><input name="username" readonly value="Username:{{ user }}"><input type='submit' name='$id' value='Lock/Unlock'></form>
+{% endfor %}
+
+</body>
+</html>

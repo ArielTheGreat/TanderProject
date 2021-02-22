@@ -1,0 +1,20 @@
+body{
+    background-color: black;
+}
+
+table{
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    border-collapse: collapse;
+    background-color: rgb(255, 192, 203,0.5);
+}
+
+td{
+    border: 2px solid;
+    width: 10%;
+    color: greenyellow;
+    text-align: center;
+}

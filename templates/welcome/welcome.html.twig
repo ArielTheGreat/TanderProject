@@ -1,0 +1,195 @@
+<html lang="en">
+	<head>
+		<title>Tander | Dating,make friends and meet new people</title>
+		<meta charset="utf-8">
+		<link rel="icon" type="image/png" href="images/icon.png">
+		<link rel="stylesheet" type="text/css" href="../styles/welcome.css">
+	</head>
+	<body>
+	<div class="menu">
+	<div class="profileButton">
+		<form action='./profile.php'>
+			<input type="submit" value="View profile/Search">
+		</form>
+	</div>
+
+    <a href="{{path('login')}}"><button>Sign off</button></a>
+	</div>
+
+		<script type="text/javascript">
+			var URL = window.URL || window.webkitURL
+
+			window.swapImage = function (elm) {
+			  var index = elm.dataset.index
+			  var url = URL.createObjectURL(elm.files[0])
+			  document.querySelector('img[data-index="'+index+'"]').src = url
+			}
+		</script>
+		<div id="profile">
+		<div id="logo">
+        <img id='avatar' data-index='0' src='images/{{avatar}}' height='300' width='300'>
+
+		</div>
+        <p id='welcoming'>Welcome back,{{user}}</p>
+		<form enctype="multipart/form-data" action="changeAvatar.php" method="POST">
+			 <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
+  			<input id="insertImage" name="userfile" type="file" data-index="0" onChange="swapImage(this)">
+  			<input id="submit" type="submit" value="Confirm changes">
+  		</form>
+		</div>
+
+		<div class="directMessage">
+        <form method="POST" action="">
+            <h2>Send Direct Message</h2>
+            <input type="text" name="address" placeholder="Address"></input>
+            <input type="text" name="subject" placeholder="Subject"></input>
+            <br>
+            <textarea placeholder="Write your message here" name="message"></textarea>
+            <br>
+            <input type="submit" value="Send">
+           
+
+        </form>
+    
+        <?php
+
+			$client = $_COOKIE['user'];
+
+            require './Connection.php';
+
+			$sel="Select status from usersapp where username='$client'";
+
+			$result3=mysqli_query($connection,$sel);
+			$row3=mysqli_fetch_row($result3);
+
+			if($row3[0]=="BLOCKED"){
+				$message = "You have been blocked by an admin, so you cant send messages";
+				echo "<script type='text/javascript'>alert('$message');</script>";
+			}else{
+
+            if(isset($_POST["address"])){
+				$address;
+				$str=$_POST["address"];
+				$subject=$_POST["subject"];
+				$message=$_POST["message"];
+				for($i=0;$i<strlen($str);$i++){
+					if(substr($str,$i,1)==" "){
+						$address=explode(" ",$str);
+					break;
+					}
+				}
+				
+				if(!empty($address)){
+					for($i=0;$i<count($address);$i++){
+						sendMessage($address[$i],$subject,$message);
+					}
+				}else{
+					sendMessage($str,$subject,$message);
+				}
+
+				
+				
+                
+            }else{
+                echo "<span>Who do you want to send a message to?</span>";
+            }
+
+            
+		}
+
+		function sendMessage($address,$subject,$message){
+			require './Connection.php';
+                $condition=searchUsers($address,$connection);
+                $transmitter=$_COOKIE["user"];
+                if($condition){
+                    $query="Insert into messages (receiver,message,subject,transmitter) 
+                    values ('$address','$message','$subject','$transmitter')";
+                    $result=mysqli_query($connection,$query);
+                    echo "<span>Message sent to ".$address."</span><br>";
+                }else{
+                   echo "<span>This user does not exist</span>";
+                }
+		}
+
+		function searchUsers($address,$connection){
+			$found=false;
+			$query="Select username from usersapp where username='$address'";
+	
+			$result=mysqli_query($connection,$query);
+			
+			$row=mysqli_fetch_row($result);
+				if(!empty($row)){
+					$found=true;
+				}
+				
+			
+			return $found;
+		}
+        ?>
+        </div>
+		<div class="messagesTable">
+		<?php
+		
+		require 'Connection.php';
+
+		$nameUser=$_COOKIE["user"];
+		$lastMessage;
+		
+		$query="Select transmitter,subject,date,code from messages where receiver='$nameUser' order by date desc";
+		$result=mysqli_query($connection,$query);
+		$row=mysqli_fetch_row($result);
+		if(empty($row[0])){
+			echo "You dont have any messages";
+		}else{
+			echo "<form class='form' method='POST' action='' >";
+		echo "<table>";
+		echo "<tr class='header'>";
+		echo "<th>Transmitter</td>";
+		echo "<th>Subject</td>";
+		echo "<th>Date/Time</td>";
+		echo "<th>See message</td>";
+		echo "</tr>";
+		
+		$lastMessage=$row[3];
+		while($row){
+			
+			echo "<tr id='$row[3]'>";
+			echo "<td>from: ".$row[0]."</td>";
+			echo "<td>".$row[1]."</td>";
+			echo "<td>".$row[2]."</td>";
+			echo "<td><input type='submit' value='See the message' name=".$row[3]."></td>";
+			echo "</tr>";
+			//añadirMuchoTexto($fila);
+			$row=mysqli_fetch_row($result);
+		}
+		echo "</table>";
+
+		echo "</form>";
+		echo "</div>";
+		for($i=0;$i<=$lastMessage;$i++){
+			if(isset($_POST[$i])){
+				echo "<script>document.getElementById($i).style.backgroundColor='rgb(155, 155, 223)'; </script>";
+				$query2="Select message from messages where code='$i'";
+				$result2=mysqli_query($connection,$query2);
+				$row=mysqli_fetch_row($result2);
+				echo "<body><div class='message' style='visibility: visible;'>";
+				echo $row[0];
+				echo "</div>";
+			}
+		}
+		}
+
+		function addText($row){
+			for($i=0;$i<100;$i++){
+				echo "<tr>";
+				echo "<td>from: ".$row[0]."</td>";
+				echo "<td>".$row[1]."</td>";
+				echo "<td>".$row[2]."</td>";
+				echo "<td><input type='submit' value='See message' ></td>";
+				echo "</tr>";
+			} 
+		}
+		?>
+		
+	</body>
+</html>

@@ -1,0 +1,64 @@
+.userProfile{
+    font-size: 1.5rem;
+    position: absolute;
+    text-align: center;
+    background-color: pink;
+    height: 80%;
+    width: 35%;
+    top:10%;
+    left: 10%;
+}
+
+.text{
+    width: 100%;
+    height: 10%;
+    font-size: 2em;
+    text-align: center;
+}
+table{
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+body{
+    background-image: url(../images/background.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.otherUserProfile{
+    font-size: 1.5rem;
+    position: absolute;
+    text-align: center;
+    background-color: pink;
+    height: 80%;
+    width: 35%;
+    top:10%;
+    right: 10%;
+}
+
+.picture{
+    height: 275px;
+    width: 275px;
+    position: relative;
+    left: 25%;
+}
+
+img{
+    height: 275px;
+    width: 275px;
+}
+
+.otherUserProfile form{
+    position: absolute;
+    top: 3%;
+    height: 10%;
+    width: 100%;
+    text-align: center;
+}
+
+.modify{
+    position: relative;
+    top: 30px;
+}
